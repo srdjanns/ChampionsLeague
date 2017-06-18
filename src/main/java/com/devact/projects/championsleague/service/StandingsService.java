@@ -66,7 +66,7 @@ public class StandingsService {
             // add 3 points to second team and increment number of won matches
             secondTeam.setPoints(secondTeam.getPoints() + 3);
             secondTeam.setWin(secondTeam.getWin() + 1);
-            // increment number of lost matches to second team
+            // increment number of lost matches to first team
             firstTeam.setLose(firstTeam.getLose() + 1);
         } else {
             // assign both teams one point
@@ -76,6 +76,11 @@ public class StandingsService {
             secondTeam.setPoints(secondTeam.getPoints() + 1);
             secondTeam.setDraw(secondTeam.getDraw() + 1);
         }
+        setAdditionalData(firstTeam, secondTeam, firstTeamGoals, secondTeamGoals);
+
+    }
+
+    private void setAdditionalData(Standings firstTeam, Standings secondTeam, int firstTeamGoals, int secondTeamGoals) {
         // set other data for first team
         firstTeam.setPlayedGames(firstTeam.getPlayedGames() + 1);
         firstTeam.setGoals(firstTeam.getGoals() + firstTeamGoals);
