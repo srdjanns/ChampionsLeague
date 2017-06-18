@@ -16,5 +16,5 @@ import java.util.List;
 @EqualsAndHashCode
 public class StatisticsDto extends LeagueStatsDto {
 
-    private List<StandingDto> standing;
+    private List<StandingsDto> standings;
 }

@@ -9,7 +9,7 @@ import lombok.*;
 @ToString
 @NoArgsConstructor
 @EqualsAndHashCode
-public class StandingDto {
+public class StandingsDto {
 
     @NonNull
     private int rank;
