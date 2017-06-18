@@ -1,7 +1,7 @@
 package com.devact.projects.championsleague.controller;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import com.devact.projects.championsleague.service.MatchService;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.service.StatisticsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +16,16 @@ import java.util.List;
  */
 
 @RestController
-@RequestMapping("/matches")
-public class MatchController {
+@RequestMapping("/statistics")
+public class StatisticsController {
 
     public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
 
     @Autowired
-    private MatchService matchService;
+    private StatisticsService statisticsService;
 
     @GetMapping
-    public List<MatchDto> getMatches() {
-        return matchService.findAllMatches();
+    public List<StatisticsDto> getStatistics() {
+        return statisticsService.findAllStatistics();
     }
-
 }

@@ -1,14 +1,10 @@
 package com.devact.projects.championsleague.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 import javax.persistence.*;
 
-@Getter
-@Setter
-@EqualsAndHashCode()
+@Data
 @MappedSuperclass
 public class LeagueStats {
 
@@ -17,10 +13,10 @@ public class LeagueStats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(name = "league_title")
     protected String leagueTitle;
 
-    @Column
+    @Column(name = "matchday")
     protected int matchday;
 
 }
