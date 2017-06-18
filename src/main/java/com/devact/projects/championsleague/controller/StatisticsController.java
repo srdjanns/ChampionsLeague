@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping("/statistics")
 public class StatisticsController {
 
-    public static final Logger logger = LoggerFactory.getLogger(MatchController.class);
+    public static final Logger logger = LoggerFactory.getLogger(StatisticsController.class);
 
     @Autowired
     private StatisticsService statisticsService;

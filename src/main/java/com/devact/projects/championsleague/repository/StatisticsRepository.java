@@ -8,5 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface StatisticsRepository extends JpaRepository<Statistics, Long> {
 
+    Statistics findStatisticsByGroup(String group);
 }
 

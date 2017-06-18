@@ -2,6 +2,7 @@ package com.devact.projects.championsleague.model;
 
 import com.devact.projects.championsleague.dto.MatchDto;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import java.util.Date;
  */
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "match")
 public class Match extends LeagueStats{
 
