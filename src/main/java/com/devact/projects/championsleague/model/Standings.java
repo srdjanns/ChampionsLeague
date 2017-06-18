@@ -1,17 +1,14 @@
 package com.devact.projects.championsleague.model;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import com.devact.projects.championsleague.dto.StandingsDto;
+import lombok.Data;
 
 import javax.persistence.*;
 
 /**
  * @author Srdjan Simidzija
  */
-@Getter
-@Setter
-@EqualsAndHashCode()
+@Data
 @Entity
 @Table(name = "standings")
 public class Standings {
@@ -20,33 +17,46 @@ public class Standings {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(name = "rank")
     protected int rank;
 
-    @Column
+    @Column(name = "team")
     protected String team;
 
-    @Column()
+    @Column(name = "played_games")
     protected int playedGames;
 
-    @Column()
+    @Column(name = "points")
     protected int points;
 
-    @Column()
+    @Column(name = "goals")
     protected int goals;
 
-    @Column()
+    @Column(name = "goals_against")
     protected int goalsAgainst;
 
-    @Column()
+    @Column(name = "goal_difference")
     protected int goalDifference;
 
-    @Column()
+    @Column(name = "win")
     protected int win;
 
-    @Column()
+    @Column(name = "lose")
     protected int lose;
 
-    @Column()
+    @Column(name = "draw")
     protected int draw;
+
+    public Standings(StandingsDto standingsDto) {
+        this.rank = standingsDto.getRank();
+        this.team = standingsDto.getTeam();
+        this.playedGames = Integer.valueOf(standingsDto.getPlayedGames());
+        this.points = Integer.valueOf(standingsDto.getPoints());
+        this.goals = Integer.valueOf(standingsDto.getGoals());
+        this.goalsAgainst = Integer.valueOf(standingsDto.getGoalsAgainst());
+        this.goalDifference = Integer.valueOf(standingsDto.getGoalDifference());
+        this.win = Integer.valueOf(standingsDto.getWin());
+        this.lose = Integer.valueOf(standingsDto.getLose());
+        this.draw = Integer.valueOf(standingsDto.getDraw());
+    }
 }
