@@ -33,4 +33,10 @@ public class StatisticsService {
     public Statistics findStatisticsByGroup(String group) {
         return statisticsRepository.findStatisticsByGroup(group);
     }
+
+    public void updateStatistics(Statistics statistics) {
+        Statistics oldStatistics = statisticsRepository.findStatisticsByGroup(statistics.getGroup());
+        statisticsRepository.delete(oldStatistics);
+        statisticsRepository.save(statistics);
+    }
 }

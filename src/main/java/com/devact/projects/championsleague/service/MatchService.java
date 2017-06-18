@@ -46,8 +46,9 @@ public class MatchService {
             return new StatisticsDto();
         }
         for (MatchDto match : matches) {
-            standingsService.updateStatistics(statistics, match);
+            standingsService.updateStandings(statistics, match);
         }
+        statisticsService.updateStatistics(statistics);
         return new StatisticsDto(statisticsService.findStatisticsByGroup(group));
 
     }

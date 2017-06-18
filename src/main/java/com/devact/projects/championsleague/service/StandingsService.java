@@ -31,7 +31,7 @@ public class StandingsService {
         return standingsRepository.findByTeam(team);
     }
 
-    public void updateStatistics(Statistics statistics, MatchDto match){
+    public void updateStandings(Statistics statistics, MatchDto match){
         Standings homeTeamStandings = findStandingsByTeam(match.getHomeTeam());
         Standings awayTeamStandings = findStandingsByTeam(match.getAwayTeam());
 
