@@ -1,10 +1,15 @@
 package com.devact.projects.championsleague.model;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * @author Srdjan Simidzija
+ */
 @Data
+@NoArgsConstructor
 @MappedSuperclass
 public class LeagueStats {
 

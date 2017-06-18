@@ -1,7 +1,10 @@
 package com.devact.projects.championsleague.service;
 
 import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.model.Statistics;
 import com.devact.projects.championsleague.repository.StatisticsRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +18,8 @@ import java.util.stream.Collectors;
 @Service
 public class StatisticsService {
 
+    public static final Logger logger = LoggerFactory.getLogger(StatisticsService.class);
+
     @Autowired
     private StatisticsRepository statisticsRepository;
 
@@ -23,5 +28,9 @@ public class StatisticsService {
                 .stream()
                 .map(statistics -> new StatisticsDto(statistics))
                 .collect(Collectors.toList());
+    }
+
+    public Statistics findStatisticsByGroup(String group) {
+        return statisticsRepository.findStatisticsByGroup(group);
     }
 }

@@ -1,6 +1,7 @@
 package com.devact.projects.championsleague.dto;
 
 import com.devact.projects.championsleague.model.Match;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class MatchDto extends LeagueStatsDto {
 
     @NotNull

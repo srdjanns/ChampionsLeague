@@ -1,7 +1,11 @@
 package com.devact.projects.championsleague.service;
 
 import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.model.Statistics;
 import com.devact.projects.championsleague.repository.MatchRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +19,37 @@ import java.util.stream.Collectors;
 @Service
 public class MatchService {
 
+    public static final Logger logger = LoggerFactory.getLogger(MatchService.class);
+
     @Autowired
     private MatchRepository matchRepository;
+
+    @Autowired
+    private StatisticsService statisticsService;
+
+    @Autowired
+    private StandingsService standingsService;
 
     public List<MatchDto> findAllMatches() {
         return matchRepository.findAll()
                 .stream()
                 .map(match -> new MatchDto(match))
                 .collect(Collectors.toList());
+    }
+
+    public StatisticsDto addMatchesAndReturnNewTable(List<MatchDto> matches) {
+        // currently, let's assume that only matches from a certain group will be sent
+        String group = matches.get(0).getGroup();
+        Statistics statistics = statisticsService.findStatisticsByGroup(group);
+        if (statistics == null) {
+            logger.error("There are no statistics for group " + group);
+            return new StatisticsDto();
+        }
+        for (MatchDto match : matches) {
+            standingsService.updateStatistics(statistics, match);
+        }
+        return new StatisticsDto(statisticsService.findStatisticsByGroup(group));
+
     }
 
 }

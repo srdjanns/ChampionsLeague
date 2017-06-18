@@ -2,6 +2,7 @@ package com.devact.projects.championsleague.model;
 
 import com.devact.projects.championsleague.dto.StandingsDto;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ import javax.persistence.*;
  */
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "standings")
 public class Standings {
 
