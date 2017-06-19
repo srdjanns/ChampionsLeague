@@ -22,5 +22,4 @@ public class LeagueStats {
 
     @Column(name = "matchday")
     protected int matchday;
-
 }

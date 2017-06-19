@@ -1,7 +1,7 @@
 package com.devact.projects.championsleague.config;
 
-import com.devact.projects.championsleague.model.ModelComponents;
-import com.devact.projects.championsleague.repository.RepositoryComponents;
+import java.util.Properties;
+
 import org.apache.commons.dbcp.BasicDataSource;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +13,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 
-import java.util.Properties;
-
+import com.devact.projects.championsleague.model.ModelComponents;
+import com.devact.projects.championsleague.repository.RepositoryComponents;
 
 /**
  * @author Srdjan Simidzija
+ *
+ * Database configuration class
  */
 @Configuration
 @EnableJpaRepositories(basePackageClasses = RepositoryComponents.class)

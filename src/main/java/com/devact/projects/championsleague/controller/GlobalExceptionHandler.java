@@ -1,5 +1,9 @@
 package com.devact.projects.championsleague.controller;
 
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.orm.jpa.JpaSystemException;
@@ -8,12 +12,10 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
-
 /**
  * @author Srdjan Simidzija
+ *
+ * Class for catching and handling global exceptions
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -21,9 +23,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     public ResponseEntity<List<String>> handleValidationException(MethodArgumentNotValidException ex) {
         BindingResult result = ex.getBindingResult();
-        List<String> fieldErrors = result.getFieldErrors()
-                .stream()
-                .map(fieldError -> fieldError.getDefaultMessage())
+        List<String> fieldErrors = result.getFieldErrors().stream().map(fieldError -> fieldError.getDefaultMessage())
                 .collect(Collectors.toList());
         return new ResponseEntity<List<String>>(fieldErrors, HttpStatus.BAD_REQUEST);
     }
