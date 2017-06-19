@@ -13,7 +13,6 @@ import javax.persistence.*;
 @MappedSuperclass
 public class LeagueStats {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

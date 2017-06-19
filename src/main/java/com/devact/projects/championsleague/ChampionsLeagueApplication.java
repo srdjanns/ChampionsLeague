@@ -3,6 +3,7 @@ package com.devact.projects.championsleague;
 import com.devact.projects.championsleague.dto.StatisticsDto;
 import com.devact.projects.championsleague.model.Statistics;
 import com.devact.projects.championsleague.repository.StatisticsRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -12,6 +13,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -34,8 +37,12 @@ public class ChampionsLeagueApplication {
 	private void populateDb() throws IOException {
 		ObjectMapper mapper = new ObjectMapper();
 
-		StatisticsDto statisticsDto = mapper.readValue(getFile("static/populate_db.json"), StatisticsDto.class);
-		statisticsRepository.save(new Statistics(statisticsDto));
+		List<StatisticsDto> statisticsDtos = mapper.readValue(getFile("static/populate_db.json"), new TypeReference<List<StatisticsDto>>(){});
+		List<Statistics> statistics = new ArrayList<>();
+		for (StatisticsDto statisticsDto : statisticsDtos) {
+			statistics.add(new Statistics(statisticsDto));
+		}
+		statisticsRepository.save(statistics);
 	}
 
 	private String getFile(String fileName) {

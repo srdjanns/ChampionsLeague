@@ -24,14 +24,9 @@ public class MatchController {
     @Autowired
     private MatchService matchService;
 
-    @GetMapping
-    public List<MatchDto> getMatches() {
-        return matchService.findAllMatches();
-    }
-
     @PostMapping
-    public StatisticsDto addMatchesAndReturnNewTable(@Valid @RequestBody List<MatchDto> matches) {
+    public List<StatisticsDto> addMatchesAndReturnNewTable(@Valid @RequestBody List<MatchDto> matches) {
+        logger.info("Adding new matches and returning updated statistics table...");
         return matchService.addMatchesAndReturnNewTable(matches);
     }
-
 }

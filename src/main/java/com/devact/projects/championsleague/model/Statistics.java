@@ -15,13 +15,23 @@ import java.util.stream.Collectors;
 @Entity
 @NoArgsConstructor
 @Table(name = "statistics")
-public class Statistics extends LeagueStats {
+public class Statistics {
+
+    @Id
+    @Column(name = "statistics_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "league_title")
+    protected String leagueTitle;
+
+    @Column(name = "matchday")
+    protected int matchday;
 
     @Column(name = "cl_group", unique = true)
     protected String group;
 
-    @Column
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @OrderBy("rank, goals, goalDifference")
     private List<Standings> standings;
 
