@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 /**
  * @author Srdjan Simidzija
  *
- * Class for catching and handling global exceptions
+ *         Class for catching and handling global exceptions
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {

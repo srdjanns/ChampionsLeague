@@ -19,7 +19,7 @@ import com.devact.projects.championsleague.repository.RepositoryComponents;
 /**
  * @author Srdjan Simidzija
  *
- * Database configuration class
+ *         Database configuration class
  */
 @Configuration
 @EnableJpaRepositories(basePackageClasses = RepositoryComponents.class)

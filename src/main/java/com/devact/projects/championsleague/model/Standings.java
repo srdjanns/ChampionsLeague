@@ -1,11 +1,11 @@
 package com.devact.projects.championsleague.model;
 
+import javax.persistence.*;
+
 import com.devact.projects.championsleague.dto.StandingsDto;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
  * @author Srdjan Simidzija
@@ -15,10 +15,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Table(name = "standings")
 public class Standings {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
     @Column(name = "rank")
     protected int rank;
@@ -49,6 +45,10 @@ public class Standings {
 
     @Column(name = "draw")
     protected int draw;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     public Standings(StandingsDto standingsDto) {
         this.rank = standingsDto.getRank();

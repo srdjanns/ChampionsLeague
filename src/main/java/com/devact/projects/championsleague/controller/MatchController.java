@@ -1,15 +1,20 @@
 package com.devact.projects.championsleague.controller;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.service.MatchService;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.util.List;
+import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.service.MatchService;
 
 /**
  * @author Srdjan Simidzija
