@@ -15,6 +15,7 @@ import com.devact.projects.championsleague.repository.StatisticsRepository;
 /**
  * @author Srdjan Simidzija
  */
+
 @Service
 public class StatisticsService {
 

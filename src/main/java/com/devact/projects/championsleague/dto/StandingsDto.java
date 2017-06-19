@@ -57,4 +57,5 @@ public class StandingsDto {
         this.lose = String.valueOf(standings.getLose());
         this.draw = String.valueOf(standings.getDraw());
     }
+
 }

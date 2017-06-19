@@ -17,24 +17,31 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(name = "statistics")
-public class Statistics extends LeagueStats {
+public class Statistics {
+
+    @Column(name = "league_title")
+    protected String leagueTitle;
+
+    @Column(name = "matchday")
+    protected int matchday;
 
     @Column(name = "cl_group", unique = true)
     protected String group;
 
-    @Column
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @OrderBy("points, goals, goalDifference")
+    @Id
+    @Column(name = "statistics_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OrderBy("rank, goals, goalDifference")
     private List<Standings> standings;
 
     public Statistics(StatisticsDto statisticsDto) {
         this.leagueTitle = statisticsDto.getLeagueTitle();
         this.matchday = statisticsDto.getMatchday();
         this.group = statisticsDto.getGroup();
-        this.standings = statisticsDto
-                        .getStanding()
-                        .stream()
-                        .map(standing -> new Standings(standing))
-                        .collect(Collectors.toList());
+        this.standings = statisticsDto.getStanding().stream().map(standing -> new Standings(standing))
+                .collect(Collectors.toList());
     }
 }

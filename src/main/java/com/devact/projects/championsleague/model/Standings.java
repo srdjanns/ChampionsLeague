@@ -16,14 +16,10 @@ import lombok.NoArgsConstructor;
 @Table(name = "standings")
 public class Standings {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @Column(name = "rank")
     protected int rank;
 
-    @Column(name = "team", unique = true)
+    @Column(name = "team")
     protected String team;
 
     @Column(name = "played_games")
@@ -49,6 +45,10 @@ public class Standings {
 
     @Column(name = "draw")
     protected int draw;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     public Standings(StandingsDto standingsDto) {
         this.rank = standingsDto.getRank();

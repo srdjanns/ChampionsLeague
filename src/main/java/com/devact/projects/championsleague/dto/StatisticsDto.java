@@ -26,4 +26,5 @@ public class StatisticsDto extends LeagueStatsDto {
         this.standing = statistics.getStandings().stream().map(standings -> new StandingsDto(standings))
                 .collect(Collectors.toList());
     }
+
 }

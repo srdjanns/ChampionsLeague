@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @MappedSuperclass
 public class LeagueStats {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "league_title", unique = true)
+    @Column(name = "league_title")
     protected String leagueTitle;
 
     @Column(name = "matchday")
     protected int matchday;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 }

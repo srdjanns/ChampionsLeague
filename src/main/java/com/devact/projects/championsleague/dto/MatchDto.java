@@ -39,4 +39,5 @@ public class MatchDto extends LeagueStatsDto {
         this.kickoffat = match.getKickoffat();
         this.score = match.getScore();
     }
+
 }

@@ -1,5 +1,6 @@
 package com.devact.projects.championsleague.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,6 +17,7 @@ import com.devact.projects.championsleague.repository.MatchRepository;
 /**
  * @author Srdjan Simidzija
  */
+
 @Service
 public class MatchService {
 
@@ -34,19 +36,38 @@ public class MatchService {
         return matchRepository.findAll().stream().map(match -> new MatchDto(match)).collect(Collectors.toList());
     }
 
-    public StatisticsDto addMatchesAndReturnNewTable(List<MatchDto> matches) {
-        // currently, let's assume that only matches from a certain group will be sent
-        String group = matches.get(0).getGroup();
+    public List<StatisticsDto> addMatchesAndReturnNewTable(List<MatchDto> matches) {
+        List<StatisticsDto> result = new ArrayList<>();
+        List<String> groups = populateGroups(matches);
+        List<Statistics> statisticsList = new ArrayList<>();
+        for (String group : groups) {
+            statisticsList.add(statisticsService.findStatisticsByGroup(group));
+        }
+        for (Statistics statistics : statisticsList) {
+            for (MatchDto match : matches) {
+                if (match.getGroup().equals(statistics.getGroup())) {
+                    updateStatisticsAndAddToList(result, match);
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    private boolean updateStatisticsAndAddToList(final List<StatisticsDto> result, final MatchDto match) {
+        String group = match.getGroup();
         Statistics statistics = statisticsService.findStatisticsByGroup(group);
         if (statistics == null) {
             logger.error("There are no statistics for group " + group);
-            return new StatisticsDto();
+            return true;
         }
-        for (MatchDto match : matches) {
-            standingsService.updateStandings(statistics, match);
-        }
+        standingsService.updateStandings(statistics, match);
         statisticsService.updateStatistics(statistics);
-        return new StatisticsDto(statisticsService.findStatisticsByGroup(group));
+        result.add(new StatisticsDto(statisticsService.findStatisticsByGroup(group)));
+        return false;
+    }
 
+    private List<String> populateGroups(final List<MatchDto> matches) {
+        return matches.stream().map(match -> match.getGroup()).distinct().collect(Collectors.toList());
     }
 }

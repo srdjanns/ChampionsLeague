@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.devact.projects.championsleague.model.Standings;
 
 /**
- * @author Srdjan Simidzija
+ * Created by Srdjan on 18/06/17.
  */
 public interface StandingsRepository extends JpaRepository<Standings, Long> {
 
