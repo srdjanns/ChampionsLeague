@@ -1,30 +1,28 @@
 package com.devact.projects.championsleague;
 
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.model.Statistics;
+import com.devact.projects.championsleague.repository.StatisticsRepository;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
+import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.model.Statistics;
-import com.devact.projects.championsleague.repository.StatisticsRepository;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 /**
  * @author Srdjan Simidzija
  */
 
 @EnableAutoConfiguration
-@SpringBootApplication
+@EntityScan("com.devact.projects.championsleague.model")
 public class ChampionsLeagueApplication {
 
     @Autowired
