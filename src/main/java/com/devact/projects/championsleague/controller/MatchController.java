@@ -1,20 +1,23 @@
 package com.devact.projects.championsleague.controller;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.service.MatchService;
+import java.util.List;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.List;
+import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.service.MatchService;
 
 /**
  * @author Srdjan Simidzija
+ *
+ * Controller class for handling <code>/matches</code> mapped REST requests
  */
-
 @RestController
 @RequestMapping("/matches")
 public class MatchController {
@@ -33,5 +36,4 @@ public class MatchController {
     public StatisticsDto addMatchesAndReturnNewTable(@Valid @RequestBody List<MatchDto> matches) {
         return matchService.addMatchesAndReturnNewTable(matches);
     }
-
 }

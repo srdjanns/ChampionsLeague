@@ -1,20 +1,20 @@
 package com.devact.projects.championsleague.service;
 
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.model.Statistics;
-import com.devact.projects.championsleague.repository.StatisticsRepository;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.model.Statistics;
+import com.devact.projects.championsleague.repository.StatisticsRepository;
 
 /**
  * @author Srdjan Simidzija
  */
-
 @Service
 public class StatisticsService {
 
@@ -24,9 +24,7 @@ public class StatisticsService {
     private StatisticsRepository statisticsRepository;
 
     public List<StatisticsDto> findAllStatistics() {
-        return statisticsRepository.findAll()
-                .stream()
-                .map(statistics -> new StatisticsDto(statistics))
+        return statisticsRepository.findAll().stream().map(statistics -> new StatisticsDto(statistics))
                 .collect(Collectors.toList());
     }
 

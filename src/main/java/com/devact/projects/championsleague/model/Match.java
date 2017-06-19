@@ -1,13 +1,15 @@
 package com.devact.projects.championsleague.model;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.Date;
+
+import com.devact.projects.championsleague.dto.MatchDto;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Srdjan Simidzija
@@ -16,7 +18,10 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @Table(name = "match")
-public class Match extends LeagueStats{
+public class Match extends LeagueStats {
+
+    @Column(name = "cl_group")
+    protected String group;
 
     @Column(name = "home_team")
     private String homeTeam;
@@ -29,9 +34,6 @@ public class Match extends LeagueStats{
 
     @Column(name = "score")
     private String score;
-
-    @Column(name = "cl_group")
-    protected String group;
 
     public Match(MatchDto matchDto) {
         this.leagueTitle = matchDto.getLeagueTitle();

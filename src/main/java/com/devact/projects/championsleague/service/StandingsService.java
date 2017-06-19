@@ -1,21 +1,21 @@
 package com.devact.projects.championsleague.service;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import com.devact.projects.championsleague.model.Standings;
-import com.devact.projects.championsleague.model.Statistics;
-import com.devact.projects.championsleague.repository.StandingsRepository;
-import com.devact.projects.championsleague.repository.StatisticsRepository;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.stream.Collectors;
+import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.model.Standings;
+import com.devact.projects.championsleague.model.Statistics;
+import com.devact.projects.championsleague.repository.StandingsRepository;
+import com.devact.projects.championsleague.repository.StatisticsRepository;
 
 /**
  * @author Srdjan Simidzija
  */
-
 @Service
 public class StandingsService {
 
@@ -31,29 +31,28 @@ public class StandingsService {
         return standingsRepository.findByTeam(team);
     }
 
-    public void updateStandings(Statistics statistics, MatchDto match){
+    public void updateStandings(Statistics statistics, MatchDto match) {
         Standings homeTeamStandings = findStandingsByTeam(match.getHomeTeam());
         Standings awayTeamStandings = findStandingsByTeam(match.getAwayTeam());
 
         calculateScoreAndAssignPoints(homeTeamStandings, awayTeamStandings, match.getScore());
 
-        statistics.setStandings(statistics.getStandings().stream()
-                .map(s -> {
-                    if (s.getTeam().equals(homeTeamStandings)) {
-                        return homeTeamStandings;
-                    } else if (s.getTeam().equals(awayTeamStandings)) {
-                        return awayTeamStandings;
-                    } else {
-                        return s;
-                    }
-                }).collect(Collectors.toList()));
+        statistics.setStandings(statistics.getStandings().stream().map(s -> {
+            if (s.getTeam().equals(homeTeamStandings)) {
+                return homeTeamStandings;
+            } else if (s.getTeam().equals(awayTeamStandings)) {
+                return awayTeamStandings;
+            } else {
+                return s;
+            }
+        }).collect(Collectors.toList()));
     }
 
     private void calculateScoreAndAssignPoints(Standings firstTeam, Standings secondTeam, final String score) {
         int firstTeamGoals;
         int secondTeamGoals;
 
-        String [] goals = score.split(":");
+        String[] goals = score.split(":");
         firstTeamGoals = Integer.valueOf(goals[0]);
         secondTeamGoals = Integer.valueOf(goals[1]);
         if (firstTeamGoals > secondTeamGoals) {
@@ -87,7 +86,7 @@ public class StandingsService {
         firstTeam.setGoalsAgainst(firstTeam.getGoalsAgainst() + secondTeamGoals);
         firstTeam.setGoalDifference(firstTeam.getGoals() - firstTeam.getGoalsAgainst());
 
-        //set other data for second team
+        // set other data for second team
         secondTeam.setPlayedGames(secondTeam.getPlayedGames() + 1);
         secondTeam.setGoals(secondTeam.getGoals() + secondTeamGoals);
         secondTeam.setGoalsAgainst(secondTeam.getGoalsAgainst() + firstTeamGoals);

@@ -1,10 +1,11 @@
 package com.devact.projects.championsleague.model;
 
+import javax.persistence.*;
+
 import com.devact.projects.championsleague.dto.StandingsDto;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 
 /**
  * @author Srdjan Simidzija
@@ -22,7 +23,7 @@ public class Standings {
     @Column(name = "rank")
     protected int rank;
 
-    @Column(name = "team")
+    @Column(name = "team", unique = true)
     protected String team;
 
     @Column(name = "played_games")

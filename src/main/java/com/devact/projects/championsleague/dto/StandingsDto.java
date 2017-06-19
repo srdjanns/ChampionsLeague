@@ -2,6 +2,7 @@ package com.devact.projects.championsleague.dto;
 
 import com.devact.projects.championsleague.model.Standings;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -11,7 +12,7 @@ import lombok.NonNull;
  */
 @Data
 @NoArgsConstructor
-@JsonIgnoreProperties(ignoreUnknown=true)
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class StandingsDto {
 
     @NonNull
@@ -56,5 +57,4 @@ public class StandingsDto {
         this.lose = String.valueOf(standings.getLose());
         this.draw = String.valueOf(standings.getDraw());
     }
-
 }

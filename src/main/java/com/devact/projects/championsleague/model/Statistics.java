@@ -1,12 +1,14 @@
 package com.devact.projects.championsleague.model;
 
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.persistence.*;
+
+import com.devact.projects.championsleague.dto.StatisticsDto;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * @author Srdjan Simidzija
@@ -22,15 +24,17 @@ public class Statistics extends LeagueStats {
 
     @Column
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @OrderBy("rank, goals, goalDifference")
+    @OrderBy("points, goals, goalDifference")
     private List<Standings> standings;
 
     public Statistics(StatisticsDto statisticsDto) {
         this.leagueTitle = statisticsDto.getLeagueTitle();
         this.matchday = statisticsDto.getMatchday();
         this.group = statisticsDto.getGroup();
-        this.standings = statisticsDto.getStanding().stream()
-                .map(standing -> new Standings(standing))
-                .collect(Collectors.toList());
+        this.standings = statisticsDto
+                        .getStanding()
+                        .stream()
+                        .map(standing -> new Standings(standing))
+                        .collect(Collectors.toList());
     }
 }

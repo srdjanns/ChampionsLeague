@@ -1,21 +1,21 @@
 package com.devact.projects.championsleague.service;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.model.Statistics;
-import com.devact.projects.championsleague.repository.MatchRepository;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.model.Statistics;
+import com.devact.projects.championsleague.repository.MatchRepository;
 
 /**
  * @author Srdjan Simidzija
  */
-
 @Service
 public class MatchService {
 
@@ -31,10 +31,7 @@ public class MatchService {
     private StandingsService standingsService;
 
     public List<MatchDto> findAllMatches() {
-        return matchRepository.findAll()
-                .stream()
-                .map(match -> new MatchDto(match))
-                .collect(Collectors.toList());
+        return matchRepository.findAll().stream().map(match -> new MatchDto(match)).collect(Collectors.toList());
     }
 
     public StatisticsDto addMatchesAndReturnNewTable(List<MatchDto> matches) {
@@ -52,5 +49,4 @@ public class MatchService {
         return new StatisticsDto(statisticsService.findStatisticsByGroup(group));
 
     }
-
 }

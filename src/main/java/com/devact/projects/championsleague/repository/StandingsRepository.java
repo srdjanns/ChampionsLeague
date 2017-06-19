@@ -1,10 +1,11 @@
 package com.devact.projects.championsleague.repository;
 
-import com.devact.projects.championsleague.model.Standings;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.devact.projects.championsleague.model.Standings;
+
 /**
- * Created by Srdjan on 18/06/17.
+ * @author Srdjan Simidzija
  */
 public interface StandingsRepository extends JpaRepository<Standings, Long> {
 
