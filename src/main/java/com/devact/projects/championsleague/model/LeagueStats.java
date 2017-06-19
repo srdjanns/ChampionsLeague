@@ -18,8 +18,4 @@ public class LeagueStats {
 
     @Column(name = "matchday")
     protected int matchday;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 }

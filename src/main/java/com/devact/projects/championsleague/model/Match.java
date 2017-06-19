@@ -2,9 +2,7 @@ package com.devact.projects.championsleague.model;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.devact.projects.championsleague.dto.MatchDto;
 
@@ -19,6 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "match")
 public class Match extends LeagueStats {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "cl_group")
     protected String group;

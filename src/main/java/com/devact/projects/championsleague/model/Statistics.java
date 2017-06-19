@@ -17,13 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(name = "statistics")
-public class Statistics {
-
-    @Column(name = "league_title")
-    protected String leagueTitle;
-
-    @Column(name = "matchday")
-    protected int matchday;
+public class Statistics extends LeagueStats{
 
     @Column(name = "cl_group", unique = true)
     protected String group;
