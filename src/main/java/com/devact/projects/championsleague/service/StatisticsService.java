@@ -25,12 +25,19 @@ public class StatisticsService {
     private StatisticsRepository statisticsRepository;
 
     public List<StatisticsDto> findAllStatistics() {
+        logger.info("Looking for all statistics...");
         return statisticsRepository.findAll().stream().map(statistics -> new StatisticsDto(statistics))
                 .collect(Collectors.toList());
     }
 
-    public Statistics findStatisticsByGroup(String group) {
-        return statisticsRepository.findStatisticsByGroup(group);
+    public StatisticsDto findStatisticsByGroup(String group) {
+        logger.info("Looking for statistics for group " + group + "...");
+        Statistics statistics = statisticsRepository.findStatisticsByGroup(group);
+        if (statistics != null) {
+            logger.info("No statistics found for group " + group);
+            return new StatisticsDto(statistics);
+        }
+        return new StatisticsDto();
     }
 
     public void updateStatistics(Statistics statistics) {

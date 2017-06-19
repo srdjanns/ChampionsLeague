@@ -28,13 +28,11 @@ public class StatisticsController {
 
     @GetMapping
     public List<StatisticsDto> getStatistics() {
-        logger.info("Looking for all statistics...");
         return statisticsService.findAllStatistics();
     }
 
     @GetMapping("/{group}")
     public StatisticsDto getStatisticsForGroup(@PathVariable String group) {
-        logger.info("Looking for statistics for group " + group + "...");
-        return new StatisticsDto(statisticsService.findStatisticsByGroup(group));
+        return statisticsService.findStatisticsByGroup(group);
     }
 }

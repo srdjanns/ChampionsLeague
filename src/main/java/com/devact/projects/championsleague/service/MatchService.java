@@ -37,13 +37,14 @@ public class MatchService {
     }
 
     public List<StatisticsDto> addMatchesAndReturnNewTable(List<MatchDto> matches) {
+        logger.info("Adding new matches and returning updated statistics table...");
         List<StatisticsDto> result = new ArrayList<>();
         List<String> groups = populateGroups(matches);
-        List<Statistics> statisticsList = new ArrayList<>();
+        List<StatisticsDto> statisticsList = new ArrayList<>();
         for (String group : groups) {
             statisticsList.add(statisticsService.findStatisticsByGroup(group));
         }
-        for (Statistics statistics : statisticsList) {
+        for (StatisticsDto statistics : statisticsList) {
             for (MatchDto match : matches) {
                 if (match.getGroup().equals(statistics.getGroup())) {
                     updateStatisticsAndAddToList(result, match);
@@ -56,14 +57,14 @@ public class MatchService {
 
     private boolean updateStatisticsAndAddToList(final List<StatisticsDto> result, final MatchDto match) {
         String group = match.getGroup();
-        Statistics statistics = statisticsService.findStatisticsByGroup(group);
+        Statistics statistics = new Statistics(statisticsService.findStatisticsByGroup(group));
         if (statistics == null) {
             logger.error("There are no statistics for group " + group);
             return true;
         }
         standingsService.updateStandings(statistics, match);
         statisticsService.updateStatistics(statistics);
-        result.add(new StatisticsDto(statisticsService.findStatisticsByGroup(group)));
+        result.add(statisticsService.findStatisticsByGroup(group));
         return false;
     }
 

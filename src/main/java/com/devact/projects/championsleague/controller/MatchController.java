@@ -3,6 +3,7 @@ package com.devact.projects.championsleague.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,8 +31,7 @@ public class MatchController {
     private MatchService matchService;
 
     @PostMapping
-    public List<StatisticsDto> addMatchesAndReturnNewTable(@Valid @RequestBody List<MatchDto> matches) {
-        logger.info("Adding new matches and returning updated statistics table...");
+    public List<StatisticsDto> addMatchesAndReturnNewTable(@NotNull @Valid @RequestBody List<MatchDto> matches) {
         return matchService.addMatchesAndReturnNewTable(matches);
     }
 }
