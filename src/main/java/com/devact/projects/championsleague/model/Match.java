@@ -1,13 +1,14 @@
 package com.devact.projects.championsleague.model;
 
-import java.util.Date;
-
-import javax.persistence.*;
-
 import com.devact.projects.championsleague.dto.MatchDto;
-
+import com.devact.projects.championsleague.utils.DateTimeUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import java.text.ParseException;
+import java.util.Date;
 
 /**
  * @author Srdjan Simidzija
@@ -32,18 +33,19 @@ public class Match extends LeagueStats {
     private String awayTeam;
 
     @Column(name = "kickoff_at")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date kickoffat;
 
     @Column(name = "score")
     private String score;
 
-    public Match(MatchDto matchDto) {
+    public Match(MatchDto matchDto) throws ParseException {
         this.leagueTitle = matchDto.getLeagueTitle();
         this.matchday = matchDto.getMatchday();
         this.score = matchDto.getScore();
         this.homeTeam = matchDto.getHomeTeam();
         this.awayTeam = matchDto.getAwayTeam();
-        this.kickoffat = matchDto.getKickoffAt();
+        this.kickoffat = DateTimeUtils.dateFormatter.parse(matchDto.getKickoffAt());
         this.score = matchDto.getScore();
         this.group = matchDto.getGroup();
     }
