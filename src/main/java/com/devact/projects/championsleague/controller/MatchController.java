@@ -1,19 +1,17 @@
 package com.devact.projects.championsleague.controller;
 
-import java.sql.Date;
-import java.util.List;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
+import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.service.MatchService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.service.MatchService;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import java.text.ParseException;
+import java.util.List;
 
 /**
  * @author Srdjan Simidzija
@@ -30,10 +28,10 @@ public class MatchController {
 
     @GetMapping
     @ResponseBody
-    public List<MatchDto> getResults(@RequestParam(value = "dateFrom", required = false) Date dateFrom,
-            @RequestParam(value = "dateTo", required = false) Date dateTo,
+    public List<MatchDto> getResults(@RequestParam(value = "dateFrom", required = false) String dateFrom,
+            @RequestParam(value = "dateTo", required = false) String dateTo,
             @RequestParam(value = "group", required = false) String group,
-            @RequestParam(value = "team", required = false) String team) {
+            @RequestParam(value = "team", required = false) String team) throws ParseException{
         return matchService.findMatchesByFilters(dateFrom, dateTo, group, team);
     }
 
