@@ -1,18 +1,19 @@
 package com.devact.projects.championsleague.controller;
 
-import com.devact.projects.championsleague.dto.MatchDto;
-import com.devact.projects.championsleague.dto.StandingsDto;
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.service.MatchService;
+import java.sql.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-import java.sql.Date;
-import java.util.List;
+import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.service.MatchService;
 
 /**
  * @author Srdjan Simidzija
@@ -29,7 +30,7 @@ public class MatchController {
 
     @GetMapping
     @ResponseBody
-    public List<StandingsDto> getResults(@RequestParam(value = "dateFrom", required = false) Date dateFrom,
+    public List<MatchDto> getResults(@RequestParam(value = "dateFrom", required = false) Date dateFrom,
             @RequestParam(value = "dateTo", required = false) Date dateTo,
             @RequestParam(value = "group", required = false) String group,
             @RequestParam(value = "team", required = false) String team) {
@@ -39,7 +40,6 @@ public class MatchController {
     @PostMapping
     @ResponseBody
     public List<StatisticsDto> addMatchesAndReturnNewTable(@NotNull @Valid @RequestBody List<MatchDto> matches) {
-        System.out.println("matches = [" + matches + "]");
         return matchService.addMatchesAndReturnNewTable(matches);
     }
 }
