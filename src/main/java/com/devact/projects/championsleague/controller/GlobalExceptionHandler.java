@@ -36,6 +36,5 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException ex) {
         return new ResponseEntity<String>(ex.getLocalizedMessage(), HttpStatus.NOT_FOUND);
-
     }
 }

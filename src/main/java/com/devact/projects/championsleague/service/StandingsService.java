@@ -1,10 +1,7 @@
 package com.devact.projects.championsleague.service;
 
-import java.sql.Date;
-import java.util.List;
 import java.util.stream.Collectors;
 
-import com.devact.projects.championsleague.dto.StandingsDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

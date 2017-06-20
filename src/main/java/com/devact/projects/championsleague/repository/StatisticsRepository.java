@@ -1,10 +1,10 @@
 package com.devact.projects.championsleague.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.devact.projects.championsleague.model.Statistics;
-
-import java.util.Optional;
 
 /**
  * @author Srdjan Simidzija

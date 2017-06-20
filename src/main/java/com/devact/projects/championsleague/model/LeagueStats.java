@@ -1,6 +1,7 @@
 package com.devact.projects.championsleague.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
