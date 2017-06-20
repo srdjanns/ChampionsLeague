@@ -43,7 +43,8 @@ public class Match extends LeagueStats {
         this.score = matchDto.getScore();
         this.homeTeam = matchDto.getHomeTeam();
         this.awayTeam = matchDto.getAwayTeam();
-        this.kickoffat = matchDto.getKickoffat();
+        this.kickoffat = matchDto.getKickoffAt();
         this.score = matchDto.getScore();
+        this.group = matchDto.getGroup();
     }
 }

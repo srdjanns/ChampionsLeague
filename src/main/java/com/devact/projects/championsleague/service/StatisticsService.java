@@ -31,17 +31,11 @@ public class StatisticsService {
     }
 
     public StatisticsDto findStatisticsByGroup(String group) {
-        logger.info("Looking for statistics for group " + group + "...");
-        Statistics statistics = statisticsRepository.findStatisticsByGroup(group);
-        if (statistics != null) {
-            logger.info("No statistics found for group " + group);
-            return new StatisticsDto(statistics);
-        }
-        return new StatisticsDto();
+        return new StatisticsDto(statisticsRepository.findStatisticsByGroup(group).get());
     }
 
     public void updateStatistics(Statistics statistics) {
-        Statistics oldStatistics = statisticsRepository.findStatisticsByGroup(statistics.getGroup());
+        Statistics oldStatistics = statisticsRepository.findStatisticsByGroup(statistics.getGroup()).get();
         statisticsRepository.delete(oldStatistics);
         statisticsRepository.save(statistics);
     }

@@ -1,7 +1,10 @@
 package com.devact.projects.championsleague.service;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
+import com.devact.projects.championsleague.dto.StandingsDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +83,7 @@ public class StandingsService {
 
     }
 
-    private void setAdditionalData(Standings firstTeam, Standings secondTeam, int firstTeamGoals, int secondTeamGoals) {
+    private void setAdditionalData(Standings firstTeam, Standings secondTeam, final int firstTeamGoals, final int secondTeamGoals) {
         // set other data for first team
         firstTeam.setPlayedGames(firstTeam.getPlayedGames() + 1);
         firstTeam.setGoals(firstTeam.getGoals() + firstTeamGoals);

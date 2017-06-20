@@ -1,9 +1,12 @@
 package com.devact.projects.championsleague.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.devact.projects.championsleague.dto.StandingsDto;
+import com.devact.projects.championsleague.model.Match;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,16 +39,22 @@ public class MatchService {
         return matchRepository.findAll().stream().map(match -> new MatchDto(match)).collect(Collectors.toList());
     }
 
-    public List<StatisticsDto> addMatchesAndReturnNewTable(List<MatchDto> matches) {
+    public List<StandingsDto> findMatchesByFilters(Date dateFrom, Date dateTo, String group, String team) {
+        logger.info("Searching for matches with ");
+        return new ArrayList<StandingsDto>();
+    }
+
+    public List<StatisticsDto> addMatchesAndReturnNewTable(List<MatchDto> matchesDto) {
         logger.info("Adding new matches and returning updated statistics table...");
+        insertMatches(matchesDto);
         List<StatisticsDto> result = new ArrayList<>();
-        List<String> groups = populateGroups(matches);
+        List<String> groups = populateGroups(matchesDto);
         List<StatisticsDto> statisticsList = new ArrayList<>();
         for (String group : groups) {
             statisticsList.add(statisticsService.findStatisticsByGroup(group));
         }
         for (StatisticsDto statistics : statisticsList) {
-            for (MatchDto match : matches) {
+            for (MatchDto match : matchesDto) {
                 if (match.getGroup().equals(statistics.getGroup())) {
                     updateStatisticsAndAddToList(result, match);
                     break;
@@ -55,17 +64,25 @@ public class MatchService {
         return result;
     }
 
-    private boolean updateStatisticsAndAddToList(final List<StatisticsDto> result, final MatchDto match) {
+    private void updateStatisticsAndAddToList(final List<StatisticsDto> result, final MatchDto match) {
         String group = match.getGroup();
         Statistics statistics = new Statistics(statisticsService.findStatisticsByGroup(group));
         if (statistics == null) {
             logger.error("There are no statistics for group " + group);
-            return true;
+            return;
         }
         standingsService.updateStandings(statistics, match);
         statisticsService.updateStatistics(statistics);
         result.add(statisticsService.findStatisticsByGroup(group));
-        return false;
+        return;
+    }
+
+    private void insertMatches(final List<MatchDto> matchesDto) {
+        List<Match> matches = new ArrayList<>();
+        for (MatchDto matchDto : matchesDto) {
+            matches.add(new Match(matchDto));
+        }
+        matchRepository.save(matches);
     }
 
     private List<String> populateGroups(final List<MatchDto> matches) {
