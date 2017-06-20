@@ -1,11 +1,13 @@
 package com.devact.projects.championsleague.model;
 
 import com.devact.projects.championsleague.dto.MatchDto;
+import com.devact.projects.championsleague.utils.DateTimeUtils;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.text.ParseException;
 import java.util.Date;
 
 /**
@@ -13,8 +15,16 @@ import java.util.Date;
  */
 @Data
 @Entity
+@NoArgsConstructor
 @Table(name = "match")
-public class Match extends LeagueStats{
+public class Match extends LeagueStats {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "cl_group")
+    protected String group;
 
     @Column(name = "home_team")
     private String homeTeam;
@@ -23,21 +33,20 @@ public class Match extends LeagueStats{
     private String awayTeam;
 
     @Column(name = "kickoff_at")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date kickoffat;
 
     @Column(name = "score")
     private String score;
 
-    @Column(name = "cl_group")
-    protected String group;
-
-    public Match(MatchDto matchDto) {
+    public Match(MatchDto matchDto) throws ParseException {
         this.leagueTitle = matchDto.getLeagueTitle();
         this.matchday = matchDto.getMatchday();
         this.score = matchDto.getScore();
         this.homeTeam = matchDto.getHomeTeam();
         this.awayTeam = matchDto.getAwayTeam();
-        this.kickoffat = matchDto.getKickoffat();
+        this.kickoffat = DateTimeUtils.dateFormatter.parse(matchDto.getKickoffAt());
         this.score = matchDto.getScore();
+        this.group = matchDto.getGroup();
     }
 }

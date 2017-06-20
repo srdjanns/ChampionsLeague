@@ -1,0 +1,112 @@
+[
+  {
+    "leagueTitle": "Champions league 2016/17",
+    "matchday": 6,
+    "group": "A",
+    "standing": [
+      {
+        "rank": 1,
+        "team": "Arsenal",
+        "playedGames": 6,
+        "points": 14,
+        "goals": 18,
+        "goalsAgainst": 6,
+        "goalDifference": 12,
+        "win": 4,
+        "lose": 0,
+        "draw": 2
+      },
+      {
+        "rank": 2,
+        "team": "PSG",
+        "playedGames": 6,
+        "points": 12,
+        "goals": 13,
+        "goalsAgainst": 7,
+        "goalDifference": 6,
+        "win": 3,
+        "lose": 3,
+        "draw": 0
+      },
+      {
+        "rank": 3,
+        "team": "Ludogorets",
+        "playedGames": 6,
+        "points": 3,
+        "goals": 6,
+        "goalsAgainst": 15,
+        "goalDifference": -9,
+        "win": 0,
+        "lose": 3,
+        "draw": 3
+      },
+      {
+        "rank": 4,
+        "team": "Basel",
+        "playedGames": 6,
+        "points": 2,
+        "goals": 3,
+        "goalsAgainst": 12,
+        "goalDifference": -9,
+        "win": 0,
+        "lose": 4,
+        "draw": 2
+      }
+    ]
+  },
+  {
+    "leagueTitle": "Champions league 2016/17",
+    "matchday": 6,
+    "group": "B",
+    "standing": [
+      {
+        "rank": 1,
+        "team": "Partizan",
+        "playedGames": 6,
+        "points": 14,
+        "goals": 18,
+        "goalsAgainst": 6,
+        "goalDifference": 12,
+        "win": 4,
+        "lose": 0,
+        "draw": 2
+      },
+      {
+        "rank": 2,
+        "team": "Crvena Zvezda",
+        "playedGames": 6,
+        "points": 12,
+        "goals": 13,
+        "goalsAgainst": 7,
+        "goalDifference": 6,
+        "win": 3,
+        "lose": 3,
+        "draw": 0
+      },
+      {
+        "rank": 3,
+        "team": "Hajduk",
+        "playedGames": 6,
+        "points": 3,
+        "goals": 6,
+        "goalsAgainst": 15,
+        "goalDifference": -9,
+        "win": 0,
+        "lose": 3,
+        "draw": 3
+      },
+      {
+        "rank": 4,
+        "team": "Vojvodina",
+        "playedGames": 6,
+        "points": 2,
+        "goals": 3,
+        "goalsAgainst": 12,
+        "goalDifference": -9,
+        "win": 0,
+        "lose": 4,
+        "draw": 2
+      }
+    ]
+  }
+]

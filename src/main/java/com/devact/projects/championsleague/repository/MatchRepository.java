@@ -1,17 +1,17 @@
 package com.devact.projects.championsleague.repository;
 
-import com.devact.projects.championsleague.model.Match;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import com.querydsl.core.types.Predicate;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.querydsl.QueryDslPredicateExecutor;
+
+import com.devact.projects.championsleague.model.Match;
 
 /**
  * @author Srdjan Simidzija
  */
-public interface MatchRepository extends JpaRepository<Match, Long> {
+public interface MatchRepository extends JpaRepository<Match, Long>, QueryDslPredicateExecutor<Match> {
 
-    Optional<Match> findById(String id) throws NoSuchElementException;
-
+    List<Match> findAll(Predicate predicate);
 }
-

@@ -1,17 +1,19 @@
 package com.devact.projects.championsleague.dto;
 
 import com.devact.projects.championsleague.model.Match;
+import com.devact.projects.championsleague.utils.DateTimeUtils;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import java.util.Date;
 
 /**
  * @author Srdjan Simidzija
  */
 @Data
 @NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MatchDto extends LeagueStatsDto {
 
     @NotNull
@@ -21,7 +23,7 @@ public class MatchDto extends LeagueStatsDto {
     private String awayTeam;
 
     @NotNull
-    private Date kickoffat;
+    private String kickoffAt;
 
     @NotNull
     private String score;
@@ -32,8 +34,9 @@ public class MatchDto extends LeagueStatsDto {
         this.score = match.getScore();
         this.homeTeam = match.getHomeTeam();
         this.awayTeam = match.getAwayTeam();
-        this.kickoffat = match.getKickoffat();
+        this.kickoffAt = DateTimeUtils.dateFormatter.format(match.getKickoffat());
         this.score = match.getScore();
+        this.group = match.getGroup();
     }
 
 }
