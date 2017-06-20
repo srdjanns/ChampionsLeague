@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 
 import javax.annotation.PostConstruct;
 import java.io.File;
@@ -23,6 +24,7 @@ import java.util.Scanner;
 
 @EnableAutoConfiguration
 @EntityScan("com.devact.projects.championsleague.model")
+@ComponentScan({"com.devact.projects.championsleague.controller", "com.devact.projects.championsleague.service"})
 public class ChampionsLeagueApplication {
 
     @Autowired

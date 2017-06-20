@@ -25,7 +25,7 @@ public class MatchDto extends LeagueStatsDto {
     private String awayTeam;
 
     @NotNull
-    private Date kickoffat;
+    private Date kickoffAt;
 
     @NotNull
     private String score;
@@ -36,8 +36,9 @@ public class MatchDto extends LeagueStatsDto {
         this.score = match.getScore();
         this.homeTeam = match.getHomeTeam();
         this.awayTeam = match.getAwayTeam();
-        this.kickoffat = match.getKickoffat();
+        this.kickoffAt = match.getKickoffat();
         this.score = match.getScore();
+        this.group = match.getGroup();
     }
 
 }
