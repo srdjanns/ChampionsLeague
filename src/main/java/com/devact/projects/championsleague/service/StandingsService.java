@@ -1,20 +1,18 @@
 package com.devact.projects.championsleague.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.devact.projects.championsleague.dto.MatchDto;
 import com.devact.projects.championsleague.model.Standings;
 import com.devact.projects.championsleague.model.Statistics;
 import com.devact.projects.championsleague.repository.StandingsRepository;
 import com.devact.projects.championsleague.repository.StatisticsRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 /**
  * @author Srdjan Simidzija
@@ -32,15 +30,19 @@ public class StandingsService {
     private StatisticsRepository statisticsRepository;
 
     public Standings findStandingsByTeam(String team) {
-        return standingsRepository.findByTeam(team);
+        return standingsRepository.findByTeamIgnoreCase(team).get();
     }
 
     public void updateStandings(Statistics statistics, MatchDto match) {
         Standings homeTeamStandings = findStandingsByTeam(match.getHomeTeam());
         Standings awayTeamStandings = findStandingsByTeam(match.getAwayTeam());
+        if (homeTeamStandings == null || awayTeamStandings == null) {
+            logger.info("No teams found.");
+            throw new NoSuchElementException("No teams found");
+        }
         calculateScoreAndAssignPoints(homeTeamStandings, awayTeamStandings, match.getScore());
 
-        statistics.setStandings(statistics.getStandings().stream().map(s -> {
+        List<Standings> standingsList = statistics.getStandings().stream().map(s -> {
             if (s.getTeam().equals(homeTeamStandings.getTeam())) {
                 return homeTeamStandings;
             } else if (s.getTeam().equals(awayTeamStandings.getTeam())) {
@@ -48,8 +50,8 @@ public class StandingsService {
             } else {
                 return s;
             }
-        }).collect(Collectors.toList()));
-
+        }).collect(Collectors.toList());
+        statistics.setStandings(standingsList);
         // update database
         statisticsRepository.flush();
     }

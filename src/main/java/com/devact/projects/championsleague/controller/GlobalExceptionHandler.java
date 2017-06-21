@@ -36,11 +36,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = NoSuchElementException.class)
     public ResponseEntity<String> handleNoSuchElementException(NoSuchElementException ex) {
-        return new ResponseEntity<String>(ex.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<String>(ex.getMessage(), HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(value = ParseException.class)
     public ResponseEntity<String> handleNoSuchElementException(ParseException ex) {
-        return new ResponseEntity<String>(ex.getLocalizedMessage(), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<String>(ex.getLocalizedMessage(), HttpStatus.BAD_REQUEST);
     }
 }

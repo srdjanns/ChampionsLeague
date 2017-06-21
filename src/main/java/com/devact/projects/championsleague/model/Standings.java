@@ -1,13 +1,10 @@
 package com.devact.projects.championsleague.model;
 
-import javax.persistence.*;
-
 import com.devact.projects.championsleague.dto.StandingsDto;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Comparator;
+import javax.persistence.*;
 
 /**
  * @author Srdjan Simidzija
@@ -16,7 +13,7 @@ import java.util.Comparator;
 @Entity
 @NoArgsConstructor
 @Table(name = "standings")
-public class Standings {
+public class Standings{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -6,7 +6,6 @@ import com.devact.projects.championsleague.model.Match;
 import com.devact.projects.championsleague.model.QMatch;
 import com.devact.projects.championsleague.model.Statistics;
 import com.devact.projects.championsleague.repository.MatchRepository;
-import com.devact.projects.championsleague.utils.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

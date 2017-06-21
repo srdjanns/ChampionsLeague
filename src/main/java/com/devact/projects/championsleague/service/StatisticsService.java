@@ -1,16 +1,15 @@
 package com.devact.projects.championsleague.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+import com.devact.projects.championsleague.dto.StatisticsDto;
+import com.devact.projects.championsleague.model.Statistics;
+import com.devact.projects.championsleague.repository.StatisticsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.devact.projects.championsleague.dto.StatisticsDto;
-import com.devact.projects.championsleague.model.Statistics;
-import com.devact.projects.championsleague.repository.StatisticsRepository;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Srdjan Simidzija
@@ -31,7 +30,7 @@ public class StatisticsService {
     }
 
     public StatisticsDto findStatisticsByGroup(String group) {
-        return new StatisticsDto(statisticsRepository.findStatisticsByGroup(group).get());
+        return new StatisticsDto(statisticsRepository.findStatisticsByGroupIgnoreCase(group).get());
     }
 
     public void updateStatistics(Statistics statistics) {

@@ -1,15 +1,12 @@
 package com.devact.projects.championsleague.model;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.persistence.*;
-
 import com.devact.projects.championsleague.dto.StatisticsDto;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.SortNatural;
+
+import javax.persistence.*;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Srdjan Simidzija
@@ -29,8 +26,8 @@ public class Statistics extends LeagueStats {
     private long id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @OrderBy("points ASC")
-//        @OrderColumn(name = "points")
+    @ElementCollection
+    @OrderBy("points, goals, goalDifference")
     private List<Standings> standings;
 
     public Statistics(StatisticsDto statisticsDto) {
