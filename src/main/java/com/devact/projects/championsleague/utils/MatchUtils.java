@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,19 +50,21 @@ public class MatchUtils {
         return parameter;
     }
 
-    public static Date ifNotNullDateFrom(Date parameter) {
-        if (parameter == null) {
+    public static Date ifNotNullDateFrom(String dateFrom) throws ParseException {
+        if (dateFrom == null) {
             // return date a year ago, no matches are before that time
-            return new Date(new Date().getTime() - (365 * 24 * 60 * 60 * 1000));
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.YEAR, -1);
+            return calendar.getTime();
         }
-        return parameter;
+        return DateTimeUtils.dateFormatter.parse(dateFrom);
     }
 
-    public static Date ifNotNullDateAfter(Date parameter) {
-        if (parameter == null) {
+    public static Date ifNotNullDateTo(String dateTo) throws ParseException {
+        if (dateTo == null) {
             // return current date, no match can come from the future
             return new Date();
         }
-        return parameter;
+        return DateTimeUtils.dateFormatter.parse(dateTo);
     }
 }
