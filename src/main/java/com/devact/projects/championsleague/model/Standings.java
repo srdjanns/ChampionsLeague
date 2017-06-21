@@ -7,6 +7,8 @@ import com.devact.projects.championsleague.dto.StandingsDto;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Comparator;
+
 /**
  * @author Srdjan Simidzija
  */
@@ -15,6 +17,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Table(name = "standings")
 public class Standings {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @Column(name = "rank")
     protected int rank;
@@ -45,10 +51,6 @@ public class Standings {
 
     @Column(name = "draw")
     protected int draw;
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
 
     public Standings(StandingsDto standingsDto) {
         this.rank = standingsDto.getRank();

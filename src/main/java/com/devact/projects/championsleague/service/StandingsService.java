@@ -1,5 +1,8 @@
 package com.devact.projects.championsleague.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -35,18 +38,20 @@ public class StandingsService {
     public void updateStandings(Statistics statistics, MatchDto match) {
         Standings homeTeamStandings = findStandingsByTeam(match.getHomeTeam());
         Standings awayTeamStandings = findStandingsByTeam(match.getAwayTeam());
-
         calculateScoreAndAssignPoints(homeTeamStandings, awayTeamStandings, match.getScore());
 
         statistics.setStandings(statistics.getStandings().stream().map(s -> {
-            if (s.getTeam().equals(homeTeamStandings)) {
+            if (s.getTeam().equals(homeTeamStandings.getTeam())) {
                 return homeTeamStandings;
-            } else if (s.getTeam().equals(awayTeamStandings)) {
+            } else if (s.getTeam().equals(awayTeamStandings.getTeam())) {
                 return awayTeamStandings;
             } else {
                 return s;
             }
         }).collect(Collectors.toList()));
+
+        // update database
+        statisticsRepository.flush();
     }
 
     private void calculateScoreAndAssignPoints(Standings firstTeam, Standings secondTeam, final String score) {

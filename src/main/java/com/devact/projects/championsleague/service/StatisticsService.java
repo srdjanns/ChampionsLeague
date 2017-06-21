@@ -35,8 +35,8 @@ public class StatisticsService {
     }
 
     public void updateStatistics(Statistics statistics) {
-        Statistics oldStatistics = statisticsRepository.findStatisticsByGroup(statistics.getGroup()).get();
-        statisticsRepository.delete(oldStatistics);
+//        Statistics oldStatistics = statisticsRepository.findStatisticsByGroup(statistics.getGroup()).get();
+        statisticsRepository.deleteStatisticsByGroup(statistics.getGroup());
         statisticsRepository.save(statistics);
     }
 }
