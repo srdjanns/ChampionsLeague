@@ -9,6 +9,7 @@ import com.devact.projects.championsleague.dto.StatisticsDto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SortNatural;
 
 /**
  * @author Srdjan Simidzija
@@ -17,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @Table(name = "statistics")
-public class Statistics extends LeagueStats{
+public class Statistics extends LeagueStats {
 
     @Column(name = "cl_group", unique = true)
     protected String group;
@@ -28,7 +29,8 @@ public class Statistics extends LeagueStats{
     private long id;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @OrderBy("rank, goals, goalDifference")
+    @OrderBy("points ASC")
+//        @OrderColumn(name = "points")
     private List<Standings> standings;
 
     public Statistics(StatisticsDto statisticsDto) {
