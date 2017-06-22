@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
  * @author Srdjan Simidzija
  */
 @Data
-@NoArgsConstructor
 @MappedSuperclass
 public class LeagueStats {
 

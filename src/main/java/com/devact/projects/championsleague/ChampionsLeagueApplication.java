@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import javax.annotation.PostConstruct;
 
+import com.devact.projects.championsleague.repository.StandingsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -28,6 +29,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @EntityScan("com.devact.projects.championsleague.model")
 @ComponentScan({"com.devact.projects.championsleague.controller", "com.devact.projects.championsleague.service"})
 public class ChampionsLeagueApplication {
+
+    @Autowired
+    private StandingsRepository standingsRepository;
 
     @Autowired
     private StatisticsRepository statisticsRepository;
