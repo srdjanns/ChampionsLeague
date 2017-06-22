@@ -6,7 +6,6 @@ import com.devact.projects.championsleague.model.Match;
 import com.devact.projects.championsleague.model.QMatch;
 import com.devact.projects.championsleague.model.Statistics;
 import com.devact.projects.championsleague.repository.MatchRepository;
-import com.devact.projects.championsleague.utils.DateTimeUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +41,7 @@ public class MatchService {
             return convertMatchesIntoMatchesDto(matchRepository.findAll());
         }
         // create query criteria; for values that are null, replace them with empty string
-        return convertMatchesIntoMatchesDto(getFilteredMatches(dateFrom, group, team));
+        return convertMatchesIntoMatchesDto(getFilteredMatches(dateFrom, dateTo, group, team));
     }
 
     public List<StatisticsDto> addMatchesAndReturnNewTable(List<MatchDto> matchesDto) {
@@ -73,15 +72,14 @@ public class MatchService {
             return;
         }
         standingsService.updateStandings(statistics, match);
-        statisticsService.updateStatistics(statistics);
         result.add(statisticsService.findStatisticsByGroup(group));
         return;
     }
 
-    private List<Match> getFilteredMatches(String dateFrom, String group, String team) throws ParseException {
+    private List<Match> getFilteredMatches(String dateFrom, String dateTo, String group, String team) throws ParseException {
         return matchRepository.findAll(
                 QMatch.match.group.contains(ifNotNull(group))
                         .and(QMatch.match.homeTeam.contains(ifNotNull(team)).or(QMatch.match.awayTeam.contains(ifNotNull(team))))
-                        .and(QMatch.match.kickoffat.between(ifNotNullDateFrom(DateTimeUtils.dateFormatter.parse(dateFrom)), ifNotNullDateAfter(DateTimeUtils.dateFormatter.parse(dateFrom)))));
+                        .and(QMatch.match.kickoffat.between(ifNotNullDateFrom(dateFrom), ifNotNullDateTo(dateTo))));
     }
 }
