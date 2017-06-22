@@ -31,6 +31,7 @@ public class Statistics extends LeagueStats {
     private List<Standings> standings;
 
     public Statistics(StatisticsDto statisticsDto) {
+        this.id = statisticsDto.getId();
         this.leagueTitle = statisticsDto.getLeagueTitle();
         this.matchday = statisticsDto.getMatchday();
         this.group = statisticsDto.getGroup();

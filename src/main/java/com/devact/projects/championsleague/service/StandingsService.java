@@ -5,6 +5,7 @@ import com.devact.projects.championsleague.model.Standings;
 import com.devact.projects.championsleague.model.Statistics;
 import com.devact.projects.championsleague.repository.StandingsRepository;
 import com.devact.projects.championsleague.repository.StatisticsRepository;
+import com.devact.projects.championsleague.utils.StandingsComparator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class StandingsService {
     private StatisticsRepository statisticsRepository;
 
     public Standings findStandingsByTeam(String team) {
-        return standingsRepository.findByTeamIgnoreCase(team).get();
+        return standingsRepository.findFirstByTeamIgnoreCase(team);
     }
 
     public void updateStandings(Statistics statistics, MatchDto match) {
@@ -52,8 +53,7 @@ public class StandingsService {
             }
         }).collect(Collectors.toList());
         statistics.setStandings(standingsList);
-        // update database
-        statisticsRepository.flush();
+        statistics.getStandings().sort(new StandingsComparator());
     }
 
     private void calculateScoreAndAssignPoints(Standings firstTeam, Standings secondTeam, final String score) {

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.devact.projects.championsleague.model.Statistics;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
@@ -17,9 +18,13 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class StatisticsDto extends LeagueStatsDto {
 
+    @JsonIgnore
+    private long id;
+
     private List<StandingsDto> standing;
 
     public StatisticsDto(Statistics statistics) {
+        this.id = statistics.getId();
         this.leagueTitle = statistics.getLeagueTitle();
         this.matchday = statistics.getMatchday();
         this.group = statistics.getGroup();
