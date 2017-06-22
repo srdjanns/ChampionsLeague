@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 @Table(name = "statistics")
 public class Statistics extends LeagueStats {
 
-    @Column(name = "cl_group", unique = true)
+    @Column(name = "cl_group", unique = true, nullable = false)
     protected String group;
 
     @Id

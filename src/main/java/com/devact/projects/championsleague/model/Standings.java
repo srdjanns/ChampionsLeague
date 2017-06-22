@@ -19,34 +19,34 @@ public class Standings{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "rank")
+    @Column(name = "rank", nullable = false)
     protected int rank;
 
-    @Column(name = "team")
+    @Column(name = "team", nullable = false)
     protected String team;
 
-    @Column(name = "played_games")
+    @Column(name = "played_games", nullable = false)
     protected int playedGames;
 
-    @Column(name = "points")
+    @Column(name = "points", nullable = false)
     protected int points;
 
-    @Column(name = "goals")
+    @Column(name = "goals", nullable = false)
     protected int goals;
 
-    @Column(name = "goals_against")
+    @Column(name = "goals_against", nullable = false)
     protected int goalsAgainst;
 
-    @Column(name = "goal_difference")
+    @Column(name = "goal_difference", nullable = false)
     protected int goalDifference;
 
-    @Column(name = "win")
+    @Column(name = "win", nullable = false)
     protected int win;
 
-    @Column(name = "lose")
+    @Column(name = "lose", nullable = false)
     protected int lose;
 
-    @Column(name = "draw")
+    @Column(name = "draw", nullable = false)
     protected int draw;
 
     public Standings(StandingsDto standingsDto) {
