@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @MappedSuperclass
 public class LeagueStats {
 
-    @Column(name = "league_title")
+    @Column(name = "league_title", nullable = false)
     protected String leagueTitle;
 
-    @Column(name = "matchday")
+    @Column(name = "matchday", nullable = false)
     protected int matchday;
 }

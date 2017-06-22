@@ -23,20 +23,20 @@ public class Match extends LeagueStats {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "cl_group")
+    @Column(name = "cl_group", nullable = false)
     protected String group;
 
-    @Column(name = "home_team")
+    @Column(name = "home_team", nullable = false)
     private String homeTeam;
 
-    @Column(name = "away_team")
+    @Column(name = "away_team", nullable = false)
     private String awayTeam;
 
-    @Column(name = "kickoff_at")
+    @Column(name = "kickoff_at", nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private Date kickoffat;
 
-    @Column(name = "score")
+    @Column(name = "score", nullable = false)
     private String score;
 
     public Match(MatchDto matchDto) throws ParseException {
